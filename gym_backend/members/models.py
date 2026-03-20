@@ -16,7 +16,7 @@ class Member(models.Model):
 
     expiry_date = models.DateField(null=True, blank=True)
 
-    status = models.BooleanField(default=True)
+    status = models.CharField(max_length=20, default='active')
 
     def __str__(self):
         return self.name

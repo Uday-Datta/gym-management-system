@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+    <!-- Card -->
+    <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-bold">{{ total_members }}</h2>
+        <p class="text-gray-500">Total Members</p>
+    </div>
+
+    <div class="bg-green-100 p-6 rounded-xl shadow">
+        <h2 class="text-xl font-bold">{{ active_members }}</h2>
+        <p class="text-gray-500">Active Members</p>
+    </div>
+
+    <div class="bg-red-100 p-6 rounded-xl shadow">
+        <h2 class="text-xl font-bold">{{ expired_members }}</h2>
+        <p class="text-gray-500">Expired Members</p>
+    </div>
+
+    <div class="bg-yellow-100 p-6 rounded-xl shadow">
+        <h2 class="text-xl font-bold">{{ today_income }} ৳</h2>
+        <p class="text-gray-500">Today Income</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow mt-8">
+    <h2 class="text-xl font-bold mb-4">Monthly Income</h2>
+    <canvas id="incomeChart"></canvas>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('incomeChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                label: 'Income',
+                data: {{ data|safe }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+{% endblock %}

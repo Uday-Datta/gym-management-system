@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-4">Members</h1>
+
+<!-- 🔍 Search -->
+<form method="GET" class="mb-4">
+    <input type="text" name="q" placeholder="Search member..."
+        class="border p-2 rounded w-64">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded">Search</button>
+</form>
+
+<!-- ➕ Add -->
+<a href="#" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">
+    + Add Member
+</a>
+
+<!-- 📋 Table -->
+<div class="bg-white shadow rounded-lg overflow-hidden">
+    <table class="w-full">
+
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="p-3">Name</th>
+                <th class="p-3">Phone</th>
+                <th class="p-3">Plan</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Expiry</th>
+                <th class="p-3">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for member in members %}
+            <tr class="border-t">
+
+                <td class="p-3">{{ member.name }}</td>
+                <td class="p-3">{{ member.phone_number }}</td>
+                <td class="p-3">{{ member.plan }}</td>
+
+                <td class="p-3">
+                    {% if member.status == 'active' %}
+                        <span class="text-green-600">Active</span>
+                    {% else %}
+                        <span class="text-red-600">Inactive</span>
+                    {% endif %}
+                </td>
+
+                <td class="p-3">{{ member.expiry_date }}</td>
+
+                <td class="p-3">
+                    <a href="#" class="text-blue-500">Edit</a>
+                    <a href="#" class="text-red-500 ml-2">Delete</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+{% endblock %}
